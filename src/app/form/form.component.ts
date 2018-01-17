@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CodeMirrorModule} from 'ngx-codemirror';
 import { CodeMirrorDirective} from '../codemirror/codemirror.directive';
 import { EditorComponent } from '../editor/index';
 

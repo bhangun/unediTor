@@ -1,9 +1,10 @@
 import {Directive, ElementRef, EventEmitter, Input,
   OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {EditorFromTextArea, EditorConfiguration, fromTextArea,CodeMirror} from 'codemirror';
+import {EditorFromTextArea, EditorConfiguration, fromTextArea, CodeMirror} from 'codemirror';
 import { DOCUMENT} from '@angular/platform-browser';
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: 'codemirror'
 })
 
@@ -22,9 +23,9 @@ export class CodeMirrorDirective implements OnInit, OnChanges {
 
   ngOnInit() {
    // const tmp = document.createElement('textarea');
-   this.are=this.element.nativeElement.textarea;
+   this.are = this.element.nativeElement.textarea;
    this.are.value = this.content;
-   this.editorRef =fromTextArea(this.are, this.config);
+   this.editorRef = fromTextArea(this.are, this.config);
    // this.editorRef =fromTextArea(this.element.nativeElement.textarea, this.config);
    // this.editorRef =fromTextArea(tmp, this.config);
     this.editorRef.setValue(this.content);
