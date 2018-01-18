@@ -6,31 +6,30 @@ import {EditorFromTextArea, EditorConfiguration, fromTextArea, CodeMirror} from 
 
 @Component({
   selector: 'app-editor',
- // template: '<codemirror ></codemirror>',
-  templateUrl: './editor.component.html',
+ template: '<textarea id="te"></textarea>',
+  // templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
 
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnChanges {
    content: string;
   config: EditorConfiguration = {
     lineNumbers: true,
     mode: 'javascript'
   };
-   // onChange = new EventEmitter<{editorInstance: any, changes: any}>();
+   onChange = new EventEmitter<{editorInstance: any, changes: any}>();
    editorRef: EditorFromTextArea;
 
   constructor(private element: ElementRef) {}
 
   ngOnInit() {
    this.editorRef = fromTextArea(document.getElementById('te') , this.config);
-    // this.editorRef.setValue(this.content);
-   // this.editorRef.on('change', null ); // (cmInstance, event) => this.onChange.emit({editorInstance: cmInstance, changes: event}));
+   // this.editorRef.setValue(this.content);
+   this.editorRef.on('change', (cmInstance, event) => this.onChange.emit({editorInstance: cmInstance, changes: event}));
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
-  /*ngOnChanges(changes: SimpleChanges) {
-
+  ngOnChanges(changes: SimpleChanges) {
+console.log('----->>>>');
     if (this.editorRef) {
       if (changes.content) {
         this.editorRef.setValue(this.content);
@@ -40,7 +39,7 @@ export class EditorComponent implements OnInit {
       }
     }
   }
-*/
+
   getContent(): string {
     return this.editorRef.getValue();
   }
